@@ -1,53 +1,25 @@
-import Test from "./Components/Test";
+import { useState } from "react";
+import { sculptureList } from "./Components/data";
+export default function Gallery() {
+  const [index, setIndex] = useState(0);
 
-function App() {
-  function handleClick(name) {
-    console.log(`${name} banano hocche`);
+  function handleClick() {
+    setIndex(index + 1);
   }
 
+  let sculpture = sculptureList[index];
   return (
     <>
-      <div style={{ textAlign: "center", padding: "20px", background: "red" }}>
-        <h1>Hello World</h1>
-        <Test />
-        <Vorta
-          aluVorta={() => handleClick("Alu vorta")}
-          tometuVorta={() => handleClick("Tometu vorta")}
-          begunVorta={() => handleClick("Begun vorta")}
-          lettuceVorta={() => handleClick("Lettuce vorta")}
-        />
-      </div>
+      <button onClick={handleClick}>Next</button>
+      <h2>
+        <i>{sculpture.name} </i>
+        by {sculpture.artist}
+      </h2>
+      <h3>
+        ({index + 1} of {sculptureList.length})
+      </h3>
+      <img src={sculpture.url} alt={sculpture.alt} />
+      <p>{sculpture.description}</p>
     </>
   );
 }
-
-function Vorta({ aluVorta, tometuVorta, begunVorta, lettuceVorta }) {
-  return (
-    <div>
-      <Button onBlend={aluVorta}>Smash Potato's</Button>
-      <Button onBlend={tometuVorta}>Smash Tomato's</Button>
-      <Button onBlend={begunVorta}>Smash Eggplant's</Button>
-      <Button onBlend={lettuceVorta}>Smash Lettuce's</Button>
-    </div>
-  );
-}
-
-function Button({ onBlend, children }) {
-  return (
-    <button
-      onClick={onBlend}
-      style={{
-        padding: "10px",
-        borderRadius: "5px",
-        background: "transparent",
-        border: "1px solid white",
-        color: "white",
-        margin: "5px",
-      }}
-    >
-      {children}
-    </button>
-  );
-}
-
-export default App;
