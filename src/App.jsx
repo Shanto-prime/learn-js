@@ -1,25 +1,33 @@
 import { useState } from "react";
-import { sculptureList } from "./Components/data";
-export default function Gallery() {
-  const [index, setIndex] = useState(0);
-
-  function handleClick() {
-    setIndex(index + 1);
+export default function Form() {
+  const [isSent, setIsSent] = useState(false);
+  const [message, setMessage] = useState("Hi!");
+  if (isSent) {
+    return (
+      <>
+        <h1>Your message is on its way!</h1>
+        <button onClick={() => setIsSent(false)}>Send another message</button>
+      </>
+    );
   }
-
-  let sculpture = sculptureList[index];
   return (
-    <>
-      <button onClick={handleClick}>Next</button>
-      <h2>
-        <i>{sculpture.name} </i>
-        by {sculpture.artist}
-      </h2>
-      <h3>
-        ({index + 1} of {sculptureList.length})
-      </h3>
-      <img src={sculpture.url} alt={sculpture.alt} />
-      <p>{sculpture.description}</p>
-    </>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        setIsSent(true);
+        sendMessage(message);
+      }}
+    >
+      <textarea
+        placeholder="Message"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+      <button type="submit">Send</button>
+    </form>
   );
+}
+
+function sendMessage(message) {
+  console.log(message);
 }
