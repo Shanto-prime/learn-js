@@ -1,20 +1,31 @@
 import { useState } from "react";
-
 export default function Counter() {
-  const [number, setNumber] = useState(0);
+  const [names, setNames] = useState([]);
+  const [name, setName] = useState("");
+
+  function handleClick(e) {
+    e.preventDefault();
+    if (name.trim() === "") return;
+    setNames([...names, name]);
+    setName("");
+  }
 
   return (
     <>
-      <h1>{number}</h1>
-      <button
-        onClick={() => {
-          setNumber(number + 1);
-          setNumber(number + 1);
-          setNumber(number + 1);
-        }}
-      >
-        +3
-      </button>
+      <form onSubmit={handleClick}>
+        <input
+          type="text"
+          placeholder="your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <button type="submit">Submit</button>
+      </form>
+      <ul>
+        {names.map((n) => (
+          <li key={n}>{n}</li>
+        ))}
+      </ul>
     </>
   );
 }
