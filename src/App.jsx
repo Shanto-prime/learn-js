@@ -1,5 +1,6 @@
 import { useState } from "react";
-export default function Counter() {
+import "./App.css";
+export default function App() {
   const [names, setNames] = useState([]);
   const [name, setName] = useState("");
 
@@ -12,8 +13,9 @@ export default function Counter() {
 
   return (
     <>
-      <form onSubmit={handleClick}>
+      <form className="mt-4" onSubmit={handleClick}>
         <input
+          name="name"
           type="text"
           placeholder="your name"
           value={name}
