@@ -1,33 +1,19 @@
-import { useState } from "react";
 import "./App.css";
-export default function App() {
-  const [names, setNames] = useState([]);
-  const [name, setName] = useState("");
-
-  function handleClick(e) {
-    e.preventDefault();
-    if (name.trim() === "") return;
-    setNames([...names, name]);
-    setName("");
+export default function App({ status = "empty" }) {
+  if (status === "success") {
+    return <h1>That's right!</h1>;
   }
-
   return (
     <>
-      <form className="mt-4" onSubmit={handleClick}>
-        <input
-          name="name"
-          type="text"
-          placeholder="your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button type="submit">Submit</button>
+      <h2>City quiz</h2>
+      <p>
+        In which city is there a billboard that turns air into drinkable water?
+      </p>
+      <form>
+        <textarea />
+        <br />
+        <button>Submit</button>
       </form>
-      <ul>
-        {names.map((n) => (
-          <li key={n}>{n}</li>
-        ))}
-      </ul>
     </>
   );
 }
