@@ -1,19 +1,12 @@
 import "./App.css";
-export default function App({ status = "empty" }) {
-  if (status === "success") {
-    return <h1>That's right!</h1>;
-  }
+import Form from "./Components/Form";
+export default function App() {
+  const statuses = ["Empty", "Submitting", "Success", "Error", "Typing"];
   return (
-    <>
-      <h2>City quiz</h2>
-      <p>
-        In which city is there a billboard that turns air into drinkable water?
-      </p>
-      <form>
-        <textarea />
-        <br />
-        <button>Submit</button>
-      </form>
-    </>
+    <div className="text-center flex justify-center m-10">
+      <h2>20+10-5-4-3-2-1</h2>
+      <p>=</p>
+      <Form />
+    </div>
   );
 }
