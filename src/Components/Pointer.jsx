@@ -5,7 +5,6 @@ export default function Pointer() {
 
   useEffect(() => {
     const handleMove = (e) => {
-      console.log(e);
       const ripple = {
         id: crypto.randomUUID(),
         x: e.clientX,

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import "./App.css";
 import Form from "./Components/Form";
 import Pointer from "./Components/Pointer";
+import Test from "./Components/Test";
 export default function App() {
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,6 +20,7 @@ export default function App() {
           <Form />
         </div>
       </div>
+      <Test />
       <Pointer />
     </>
   );
