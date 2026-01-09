@@ -1,13 +1,14 @@
-export default function TravelTree({ place }) {
-  const childPlaces = place.childPlaces;
+export default function TravelTree({ placesId, id }) {
+  const place = placesId[id];
+  const childIds = place.childIds;
   return (
     <>
       <li>
         {place.title}
         <ol className="pl-4 list-decimal list-inside">
-          {childPlaces.length > 0 &&
-            childPlaces.map((childPlace) => (
-              <TravelTree key={childPlace.id} place={childPlace} />
+          {childIds.length > 0 &&
+            childIds.map((id) => (
+              <TravelTree key={id} id={id} placesId={placesId} />
             ))}
         </ol>
       </li>
