@@ -1,4 +1,4 @@
-export default function TravelTree({ placesId, id, onClick, parentId }) {
+export default function TravelTree({ placesId, id, onDelete, parentId }) {
   const place = placesId[id];
   const childIds = place.childIds;
   return (
@@ -7,19 +7,19 @@ export default function TravelTree({ placesId, id, onClick, parentId }) {
         {place.title}
         <button
           className="text-red-500 border-2 border-red-500 rounded-2xl px-2 mx-3"
-          onClick={() => onClick(id, parentId)}
+          onClick={() => onDelete(id, parentId)}
         >
           Delete
         </button>
         <ol className="pl-4 list-decimal list-inside">
           {childIds.length > 0 &&
-            childIds.map((id) => (
+            childIds.map((childId) => (
               <TravelTree
-                key={id}
-                id={id}
-                parentId={parentId}
+                key={childId}
+                id={childId}
+                parentId={id}
                 placesId={placesId}
-                onClick={onClick}
+                onDelete={onDelete}
               />
             ))}
         </ol>

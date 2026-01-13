@@ -5,7 +5,7 @@ export default function TravelPlan() {
   const [plan, setPlan] = useState(initialTravelPlan);
   const root = plan[0];
   const PlanetIds = root.childIds;
-  const handleDelete = (parentId, selfId) => {
+  const handleDelete = (selfId, parentId) => {
     const parent = plan[parentId];
     const nextParent = {
       ...parent,
@@ -13,7 +13,7 @@ export default function TravelPlan() {
     };
     setPlan({
       ...plan,
-      nextParent,
+      [parentId]: nextParent,
     });
     console.log("delete btn pressed");
   };
@@ -26,7 +26,7 @@ export default function TravelPlan() {
             key={id}
             placesId={plan}
             id={id}
-            onClick={handleDelete}
+            onDelete={handleDelete}
             parentId={0}
           />
         ))}
