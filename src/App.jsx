@@ -1,11 +1,11 @@
 import "./App.css";
+import Accordion from "./Components/Accordion";
 import Pointer from "./Components/Pointer";
-import TravelPlan from "./Components/TravelPlan";
 export default function App() {
-  return (
-    <>
-      <TravelPlan />
-      <Pointer />
-    </>
-  );
+    return (
+        <>
+            <Accordion />
+            <Pointer />
+        </>
+    );
 }
