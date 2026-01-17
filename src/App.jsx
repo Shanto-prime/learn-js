@@ -1,10 +1,10 @@
 import "./App.css";
-import Accordion from "./Components/Accordion";
+import Counter from "./Components/Counter";
 import Pointer from "./Components/Pointer";
 export default function App() {
     return (
         <>
-            <Accordion />
+            <Counter />
             <Pointer />
         </>
     );
