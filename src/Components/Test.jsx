@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Test() {
     const [items, setItems] = useState(["hello", "hi"]);
@@ -24,7 +24,9 @@ export default function Test() {
     const handleSave = () => {
         if (editValue.trim()) {
             setItems((prevItems) =>
-                prevItems.map((item, i) => (i === editingIndex ? editValue.trim() : item))
+                prevItems.map((item, i) =>
+                    i === editingIndex ? editValue.trim() : item
+                )
             );
         }
         setEditingIndex(null);
@@ -45,17 +47,23 @@ export default function Test() {
         <div className="max-w-md mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
             <ul className="space-y-2 mb-4">
                 {items.map((item, index) => (
-                    <li key={index} className="flex items-center justify-between bg-white p-2 rounded">
+                    <li
+                        key={index}
+                        className="flex items-center justify-between bg-white p-2 rounded"
+                    >
                         {editingIndex === index ? (
                             <div className="flex items-center space-x-2 w-full">
                                 <input
                                     type="text"
                                     value={editValue}
-                                    onChange={(e) => setEditValue(e.target.value)}
+                                    onChange={(e) =>
+                                        setEditValue(e.target.value)
+                                    }
                                     className="flex-1 p-1 border rounded"
                                     onKeyDown={(e) => {
                                         if (e.key === "Enter") handleSave();
-                                        if (e.key === "Escape") setEditingIndex(null);
+                                        if (e.key === "Escape")
+                                            setEditingIndex(null);
                                     }}
                                 />
                                 <button
