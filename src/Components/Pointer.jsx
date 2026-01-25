@@ -1,40 +1,55 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-export default function Pointer() {
-  const [ripples, setRipples] = useState([]);
+const RIPPLE_LIFETIME_MS = 700;
+const MAX_RIPPLES = 15;
 
-  useEffect(() => {
-    const handleMove = (e) => {
-      const ripple = {
-        id: crypto.randomUUID(),
-        x: e.clientX,
-        y: e.clientY,
-      };
+function Pointer() {
+    const [ripples, setRipples] = useState([]);
 
-      setRipples((prev) => [...prev.slice(-15), ripple]);
+    const handlePointerMove = useCallback((event) => {
+        const ripple = {
+            id: crypto.randomUUID(),
+            x: event.clientX,
+            y: event.clientY,
+        };
 
-      setTimeout(() => {
-        setRipples((prev) => prev.filter((r) => r.id !== ripple.id));
-      }, 700);
-    };
+        setRipples((prevRipples) => [
+            ...prevRipples.slice(-MAX_RIPPLES),
+            ripple,
+        ]);
 
-    window.addEventListener("pointermove", handleMove);
-    return () => window.removeEventListener("pointermove", handleMove);
-  }, []);
+        const timeoutId = setTimeout(() => {
+            setRipples((prevRipples) =>
+                prevRipples.filter((r) => r.id !== ripple.id),
+            );
+        }, RIPPLE_LIFETIME_MS);
 
-  return (
-    <div className="fixed inset-0 z-50 pointer-events-none">
-      {ripples.map((ripple) => (
-        <div
-          key={ripple.id}
-          className="absolute w-3 h-3 rounded-full cursor-ripple"
-          style={{
-            left: ripple.x,
-            top: ripple.y,
-            transform: "translate(-50%, -50%)",
-          }}
-        />
-      ))}
-    </div>
-  );
+        return () => clearTimeout(timeoutId);
+    }, []);
+
+    useEffect(() => {
+        window.addEventListener("pointermove", handlePointerMove);
+
+        return () => {
+            window.removeEventListener("pointermove", handlePointerMove);
+        };
+    }, [handlePointerMove]);
+
+    return (
+        <div className="fixed inset-0 z-50 pointer-events-none">
+            {ripples.map((ripple) => (
+                <div
+                    key={ripple.id}
+                    className="absolute w-3 h-3 rounded-full cursor-ripple"
+                    style={{
+                        left: `${ripple.x}px`,
+                        top: `${ripple.y}px`,
+                        transform: "translate(-50%, -50%)",
+                    }}
+                />
+            ))}
+        </div>
+    );
 }
+
+export default Pointer;
