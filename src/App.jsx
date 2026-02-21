@@ -1,11 +1,17 @@
 import "./App.css";
-import Pointer from "./Components/Pointer";
-import Test from "./Components/Test";
+import Heading from "./Components/Heading";
+import Section from "./Components/Section";
 export default function App() {
     return (
         <>
-            <Test />
-            <Pointer />
+            <Section>
+                <Heading level={1}>Title</Heading>
+                <Heading level={2}>Heading</Heading>
+                <Heading level={3}>Sub-heading</Heading>
+                <Heading level={4}>Sub-sub-heading</Heading>
+                <Heading level={5}>Sub-sub-sub-heading</Heading>
+                <Heading level={6}>Sub-sub-sub-sub-heading</Heading>
+            </Section>
         </>
     );
 }
